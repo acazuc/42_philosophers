@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 13:06:10 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 13:59:53 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/19 15:20:25 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	start_threads(t_env *env)
 			ERROR("Failed to start thread");
 		lst = lst->next;
 	}
-	lst = env->philos;
+	/*lst = env->philos;
 	while (lst)
 	{
 		pthread_join(lst->philo->thread, NULL);
 		ft_putstr("joined thread\n");
 		lst = lst->next;
-	}
+	}*/
 }

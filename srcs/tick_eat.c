@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 13:22:06 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 13:50:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/19 15:26:00 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ static int		lock(t_philo *philo)
 	return (1);
 }
 
-void			tick_eat(t_philo *philo)
+int			tick_eat(t_philo *philo)
 {
 	if (!philo->eat_count)
 	{
 		if (!lock(philo))
-			return ;
+			return (0);
 		philo->eat_count = EAT_T;
 	}
 	else
@@ -50,4 +50,5 @@ void			tick_eat(t_philo *philo)
 		philo->life = MAX_LIFE;
 		philo->rest_count = REST_T;
 	}
+	return (1);
 }

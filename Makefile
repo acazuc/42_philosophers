@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/03/19 13:48:10 by acazuc           ###   ########.fr        #
+#    Updated: 2016/03/19 16:09:23 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,10 @@ SRCS_NAME = main.c \
 			tick.c \
 			tick_eat.c \
 			tick_think.c \
+			pixel_put.c \
+			window_init.c \
+			display.c \
+			draw_health.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
@@ -37,7 +41,7 @@ OBJS_NAME = $(SRCS_NAME:.c=.o)
 
 OBJS = $(addprefix $(OBJS_PATH), $(OBJS_NAME))
 
-LIBRARY = -L libft/ -lft
+LIBRARY = -L libft/ -lft -lmlx -lpthread -lm -framework AppKit -framework OpenGL
 
 all: odir $(NAME)
 

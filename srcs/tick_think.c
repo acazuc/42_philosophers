@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 13:31:06 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 13:51:02 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/19 15:26:24 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static int	lock(t_philo *philo)
 	return (1);
 }
 
-void	tick_think(t_philo *philo)
+int		tick_think(t_philo *philo)
 {
 	int		err;
 
 	if (!philo->think_count)
 	{
 		if (!lock(philo))
-			return ;
+			return (0);
 		philo->think_count = THINK_T;
 	}
 	else
@@ -50,4 +50,5 @@ void	tick_think(t_philo *philo)
 		else if (err)
 			ERROR("mutex_unlock hard failed");
 	}
+	return (1);
 }
