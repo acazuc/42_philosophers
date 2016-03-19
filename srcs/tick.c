@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 12:52:45 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 18:01:06 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/19 18:10:40 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,15 @@ static void		*unlock(t_philo *philo)
 	return (philo);
 }
 
-static long		current_us()
-{
-	struct timeval		time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-}
-
 void			*tick(void *arg)
 {
 	t_philo	*philo;
-	long	tmp;
 
 	philo = (t_philo*)arg;
 	while (philo->life > 0)
 	{
-		tmp = current_us();
+		if (philo->think_count)
+			philo->think_count--;
 		if (philo->rest_count)
 		{
 			philo->life--;
@@ -46,14 +38,22 @@ void			*tick(void *arg)
 				|| (!philo->rest_count && !philo->think_count)) && tick_eat(philo))
 		{
 		}
-		/*else if (philo->think_count || (!philo->eat_count && !philo->rest_count))
-		{
-			tick_think(philo);
-			philo->life--;
-		}*/
 		else
-			philo->life--;
-		usleep(100000);
+		{
+			if (pthread_mutex_trylock(philo->left))
+			{
+				pthread_mutex_unlock(philo->left);
+				philo->life--;
+				philo->think_count = 1;
+			}
+			else if (pthread_mutex_trylock(philo->right))
+			{
+				pthread_mutex_unlock(philo->right);
+				philo->life--;
+				philo->think_count = 1;
+			}
+		}
+		usleep(10000000);
 	}
 	return (unlock(arg));
 }
