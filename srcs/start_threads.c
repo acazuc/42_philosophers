@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_create.h                                     :+:      :+:    :+:   */
+/*   start_threads.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/19 11:32:19 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 11:34:01 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/19 13:06:10 by acazuc            #+#    #+#             */
+/*   Updated: 2016/03/19 13:59:53 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-t_philo	*philo_create(void)
+void	start_threads(t_env *env)
 {
-	t_philo	*philo;
+	t_philo_list	*lst;
 
-	if (!(philo = malloc(sizeof(*philo))))
-		ERROR("Failed to malloc new philosopher");
-	philo->left = NULL;
-	philo->right = NULL;
-	philo->life = MAX_LIFE;
-	philo->eat_count = 0;
-	philo->rest_count = 0;
-	philo->think_count = 0;
+	lst = env->philos;
+	while (lst)
+	{
+		if (pthread_create(&lst->philo->thread, NULL, tick, lst->philo))
+			ERROR("Failed to start thread");
+		lst = lst->next;
+	}
+	lst = env->philos;
+	while (lst)
+	{
+		pthread_join(lst->philo->thread, NULL);
+		ft_putstr("joined thread\n");
+		lst = lst->next;
+	}
 }

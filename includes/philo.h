@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 11:24:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 11:32:10 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/19 13:09:19 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef struct		s_philo
 {
 	pthread_mutex_t	*left;
 	pthread_mutex_t	*right;
+	pthread_t		thread;
 	int				life;
 	int				eat_count;
 	int				rest_count;

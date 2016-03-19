@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/03/19 10:19:43 by acazuc           ###   ########.fr        #
+#    Updated: 2016/03/19 13:48:10 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,13 @@ INCLUDES_PATH = includes/
 SRCS_PATH = srcs/
 
 SRCS_NAME = main.c \
+			env_init.c \
+			error_quit.c \
+			philo_create.c \
+			start_threads.c \
+			tick.c \
+			tick_eat.c \
+			tick_think.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

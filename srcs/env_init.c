@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 11:30:07 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 11:46:32 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/19 14:00:11 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void		env_init(t_env *env)
 	t_philo		*curr;
 	int			i;
 
+	env->philos = NULL;
 	prev = NULL;
 	i = 0;
 	while (i < 7)
@@ -57,7 +58,8 @@ void		env_init(t_env *env)
 		curr = philo_create();
 		if (prev)
 			curr->left = prev->right;
-		curr->right = PTHREAD_MUTEX_INITIALIZER;
+		if (!(curr->right = malloc(sizeof(*curr->right))))
+			ERROR("Failed to malloc mutex");
 		if (pthread_mutex_init(curr->right, NULL))
 			ERROR("Failed to init mutex");
 		push_philo(env, curr);

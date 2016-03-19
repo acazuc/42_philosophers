@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   philo_create.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/19 11:17:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 13:54:07 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/19 11:32:19 by acazuc            #+#    #+#             */
+/*   Updated: 2016/03/19 12:47:36 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int		main(void)
+t_philo	*philo_create(void)
 {
-	t_env	env;
+	t_philo	*philo;
 
-	env_init(&env);
-	start_threads(&env);
+	if (!(philo = malloc(sizeof(*philo))))
+		ERROR("Failed to malloc new philosopher");
+	philo->left = NULL;
+	philo->right = NULL;
+	philo->life = MAX_LIFE;
+	philo->eat_count = 0;
+	philo->rest_count = 0;
+	philo->think_count = 0;
+	return (philo);
 }

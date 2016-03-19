@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 11:16:19 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 11:19:33 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/19 12:39:32 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,7 @@
 # define REST_T 10
 # define THINK_T 10
 # define TIMEOUT 10
+
+# define ERROR(x) (error_quit(x, __FILE__, __LINE__))
 
 #endif
