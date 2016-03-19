@@ -6,12 +6,12 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 12:52:45 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 16:05:09 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/19 18:01:06 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-#include <stdio.h>
+#include <sys/time.h>
 
 static void		*unlock(t_philo *philo)
 {
@@ -20,21 +20,29 @@ static void		*unlock(t_philo *philo)
 	return (philo);
 }
 
+static long		current_us()
+{
+	struct timeval		time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
 void			*tick(void *arg)
 {
 	t_philo	*philo;
+	long	tmp;
 
 	philo = (t_philo*)arg;
-	while (1)
+	while (philo->life > 0)
 	{
-		if (philo->life == 0)
-			return (unlock(philo));
+		tmp = current_us();
 		if (philo->rest_count)
 		{
 			philo->life--;
 			philo->rest_count--;
 		}
-		else if (((philo->life < MAX_LIFE || philo->eat_count)
+		else if (((philo->life - EAT_T < MAX_LIFE || philo->eat_count)
 				|| (!philo->rest_count && !philo->think_count)) && tick_eat(philo))
 		{
 		}
@@ -45,7 +53,7 @@ void			*tick(void *arg)
 		}*/
 		else
 			philo->life--;
-		usleep(10000);
+		usleep(100000);
 	}
-	return (arg);
+	return (unlock(arg));
 }

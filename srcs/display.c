@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 14:52:29 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 16:12:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/19 16:57:04 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void		draw_status(t_env *env, t_philo *philo, int x, int y)
 	y++;
 	if (philo->eat_count)
 	{
+		x -= 34;
 		pixel_put(env, x - 1, y - 0, 0);
 		pixel_put(env, x - 1, y + 1, 0);
 		pixel_put(env, x - 1, y + 2, 0);
@@ -30,11 +31,28 @@ static void		draw_status(t_env *env, t_philo *philo, int x, int y)
 	}
 	else if (philo->rest_count)
 	{
+		x -= 30;
 		pixel_put(env, x - 1, y + 0, 0);
 		pixel_put(env, x - 1, y + 1, 0);
 		pixel_put(env, x - 1, y + 2, 0);
 		pixel_put(env, x - 1, y + 3, 0);
 		pixel_put(env, x - 1, y + 4, 0);
+		pixel_put(env, x + 0, y + 0, 0);
+		pixel_put(env, x + 1, y + 1, 0);
+		pixel_put(env, x + 0, y + 2, 0);
+		pixel_put(env, x + 1, y + 3, 0);
+		pixel_put(env, x + 1, y + 4, 0);
+	}
+	else if (philo->think_count)
+	{
+		x -= 26;
+		pixel_put(env, x - 1, y + 0, 0);
+		pixel_put(env, x + 0, y + 0, 0);
+		pixel_put(env, x + 1, y + 0, 0);
+		pixel_put(env, x + 0, y + 1, 0);
+		pixel_put(env, x + 0, y + 2, 0);
+		pixel_put(env, x + 0, y + 3, 0);
+		pixel_put(env, x + 0, y + 4, 0);
 	}
 }
 

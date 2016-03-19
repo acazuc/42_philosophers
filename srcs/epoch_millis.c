@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   defines.h                                          :+:      :+:    :+:   */
+/*   epoch_millis.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/19 11:16:19 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 17:43:29 by acazuc           ###   ########.fr       */
+/*   Created: 2016/03/19 17:29:52 by acazuc            #+#    #+#             */
+/*   Updated: 2016/03/19 17:30:29 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#include "philosophers.h"
 
-# define MAX_LIFE 10
-# define EAT_T 1
-# define REST_T 1
-# define THINK_T 1
-# define TIMEOUT 60
+long	epoch_us(void)
+{
+	struct timeval		time;
 
-# define ERROR(x) (error_quit(x, __FILE__, __LINE__))
-
-#endif
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}

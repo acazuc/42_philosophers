@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 11:30:07 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 14:00:11 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/19 17:11:29 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	set_last_link(t_env *env)
 		lst = lst->next;
 	last = lst->philo;
 	env->philos->philo->left = last->right;
+	last->philo_right = env->philos->philo;
+	env->philos->philo->philo_left = last;
 }
 
 void		env_init(t_env *env)
@@ -57,7 +59,11 @@ void		env_init(t_env *env)
 	{
 		curr = philo_create();
 		if (prev)
+		{
 			curr->left = prev->right;
+			prev->philo_right = curr;
+		}
+		curr->philo_left = prev;
 		if (!(curr->right = malloc(sizeof(*curr->right))))
 			ERROR("Failed to malloc mutex");
 		if (pthread_mutex_init(curr->right, NULL))

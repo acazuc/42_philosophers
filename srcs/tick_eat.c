@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 13:22:06 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 15:26:00 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/19 17:54:59 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static int		lock(t_philo *philo)
 		ERROR("mutex_trylock hard failed");
 	if ((err = pthread_mutex_trylock(philo->right)) == EBUSY)
 	{
-		if (pthread_mutex_unlock(philo->left))
-			ERROR("mutex_unlock hard failed");
+		pthread_mutex_unlock(philo->left);
 		return (0);
 	}
 	else if (err)

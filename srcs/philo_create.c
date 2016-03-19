@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/19 11:32:19 by acazuc            #+#    #+#             */
-/*   Updated: 2016/03/19 12:47:36 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/03/19 17:42:08 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_philo	*philo_create(void)
 	philo->left = NULL;
 	philo->right = NULL;
 	philo->life = MAX_LIFE;
+	philo->release_request = 0;
 	philo->eat_count = 0;
 	philo->rest_count = 0;
 	philo->think_count = 0;
